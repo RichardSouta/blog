@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\BlogPost;
 use Doctrine\ORM\EntityManagerInterface;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,10 +29,17 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request): Response
     {
-        $page = $request->query->get('page', 1);
+        $page = $request->query->getInt('page', 1);
+        $queryBuilder = $this->em->createQueryBuilder()
+            ->select('bp')
+            ->from(BlogPost::class, 'bp')
+            ->where('bp.hidden = false');
+        $adapter = new DoctrineORMAdapter($queryBuilder);
+        $pagerfanta = new Pagerfanta($adapter);
+        $pagerfanta->setMaxPerPage(2)->setCurrentPage($page);
         $blogPosts = $this->em->getRepository(BlogPost::class)->findBy(['hidden' => false], ['date' => 'desc'], 2, ($page - 1) * 2);
         return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
+            'pager' => $pagerfanta,
             'blogPosts' => $blogPosts,
         ]);
     }
