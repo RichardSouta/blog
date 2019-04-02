@@ -4,27 +4,17 @@
 
     <div id="wrapper">
         <div id="container">
+            <a href="{{ path('homepage') }}">Homepage</a>
             <div id="welcome">
-                <h1>Blog</h1>
+                <h1>{{ blogPost.title }}</h1>
+                {{ blogPost.date|date("m/d/Y H:i:s") }}
             </div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Blog's title</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Detail</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for blogPost in blogPosts %}
-                    <tr>
-                        <td>{{ blogPost.title }}</td>
-                        <td>{{ blogPost.date|date("m/d/Y H:i:s") }}</td>
-                        <td> <a href="{{ path('detail', {id : blogPost.id}) }}">Show detail</a></td>
-                    </tr>
+            <div>Tags:
+                {% for tag in blogPost.tags %}
+                    {{ tag.id }}{% if loop.last == false %},{% endif %}
                 {% endfor %}
-                </tbody>
-            </table>
+            </div>
+            <div>{{ blogPost.text|raw }}</div>
         </div>
     </div>
 {% endblock %}
