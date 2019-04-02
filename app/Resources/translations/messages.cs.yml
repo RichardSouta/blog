@@ -1,0 +1,26 @@
+Post: Příspěvky
+post:
+    label: Příspěvky
+    list:
+        title: Seznam příspěvků
+        actions:
+            show: Zobrazit
+            edit: Upravit
+            new: Nový příspěvek
+            delete: Smazat
+            search: Hledat
+        fields:
+            title: Nadpis
+            text: Text
+            date: Datum
+            hidden: Je příspěvek schován?
+            tags: Tagy
+            viewsCount: počet zhlédnutí
+tag:
+    label: Tagy
+    list:
+        title: Tagy
+        fields:
+            id: název tagu
+        actions:
+            new: Nový tag

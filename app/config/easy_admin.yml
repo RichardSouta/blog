@@ -1,0 +1,54 @@
+easy_admin:
+  site_name: Blog
+  entities:
+    BlogPost:
+      disabled_actions: ['delete']
+      class: AppBundle\Entity\BlogPost
+      label: post.label
+      list:
+        title: post.list.title
+        actions:
+          - { name: 'show', label: post.list.actions.show }
+          - { name: 'edit', label: post.list.actions.edit }
+          - { name: 'new', label: post.list.actions.new }
+          - { name: 'search', label: post.list.actions.search }
+        fields:
+          - { property: 'title', label: post.list.fields.title }
+          - { property: 'text', label: post.list.fields.text, type: 'raw' }
+          - { property: 'date', label: post.list.fields.date }
+          - { property: 'hidden', label: post.list.fields.hidden }
+          - { property: 'tags', label: post.list.fields.tags, type: 'array' }
+          - { property: 'viewsCount', label: post.list.fields.viewsCount }
+      form:
+        fields:
+          - { property: 'title', label: post.list.fields.title }
+          - { property: 'text', type: 'fos_ckeditor', label: post.list.fields.text }
+          - { property: 'hidden', label: post.list.fields.hidden }
+          - { property: 'date', label: post.list.fields.date }
+          - { property: 'tags', label: post.list.fields.tags }
+      show:
+        fields:
+          - { property: 'title', label: post.list.fields.title }
+          - { property: 'text', label: post.list.fields.text, type: 'raw' }
+          - { property: 'hidden', label: post.list.fields.hidden }
+          - { property: 'date', label: post.list.fields.date }
+          - { property: 'tags', label: post.list.fields.tags }
+          - { property: 'viewsCount', label: post.list.fields.viewsCount }
+    Tag:
+      class: AppBundle\Entity\Tag
+      label: tag.label
+      list:
+        title: tag.list.title
+        actions:
+          - { name: 'show', label: post.list.actions.show }
+          - { name: 'edit', label: post.list.actions.edit }
+          - { name: 'new', label: tag.list.actions.new }
+          - { name: 'search', label: post.list.actions.search }
+        fields:
+          - { property: 'id', label: tag.list.fields.id }
+      form:
+        fields:
+          - { property: 'id', label: tag.list.fields.id }
+      show:
+        fields:
+          - { property: 'id', label: tag.list.fields.id }

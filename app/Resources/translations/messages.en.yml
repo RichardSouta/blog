@@ -1,0 +1,26 @@
+Post: Posts
+post:
+    label: Posts
+    list:
+        title: List of posts
+        actions:
+            show: Show
+            edit: Edit
+            new: New post
+            delete: Delete
+            search: Search
+        fields:
+            title: Title
+            text: Text
+            date: Date
+            hidden: Is a blog post hidden?
+            tags: Tags
+            viewsCount: number of views
+tag:
+    label: Tags
+    list:
+        title: Tags
+        fields:
+            id: tag's name
+        actions:
+            new: New tag
